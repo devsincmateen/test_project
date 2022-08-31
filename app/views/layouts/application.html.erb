@@ -10,6 +10,15 @@
   </head>
 
   <body>
+
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+
+      <% if user_signed_in? %>
+        <p>Hey there I am a user and I am signed in</p>
+      <%else%>
+      <a href='users/sign_in'> Sign In </a>
+      <%end%>
     <%= yield %>
   </body>
 </html>
