@@ -15,10 +15,10 @@
        <p class="alert"><%= alert %></p>
 
       <% if user_signed_in? %>
-        <p>Hey there I am a user and I am signed in</p>
+        <p>Hey there I am a user and I am signed in <%= current_user.email %></p>
       <%else%>
-      <a href='users/sign_in'> Sign In </a>
+      <a href='/users/sign_in'> Sign In han han kr leta hu </a>
       <%end%>
-    <%= yield %>
+      <%= yield %>
   </body>
 </html>

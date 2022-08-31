@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @plan.code %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @plan.name %>
+</p>
+
+<p>
+  <strong>Monthly income:</strong>
+  <%= @plan.monthly_income %>
+</p>
+
+<p>
+  <strong>Unit price:</strong>
+  <%= @plan.unit_price %>
+</p>
+
+<p>
+  <strong>Max unit limit:</strong>
+  <%= @plan.max_unit_limit %>
+</p>
+
+<%= link_to 'Edit', edit_plan_path(@plan) %> |
+<%= link_to 'Back', plans_path %>
