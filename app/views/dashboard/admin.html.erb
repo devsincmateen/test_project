@@ -1,2 +1,8 @@
 Hello I am admin <%= current_user %>
 <%= render partial: 'sign_out'%>
+<h1>Admin Dashboard</h1>
+<p>You are signed in as <%= current_user.email%> </p>
+
+<%= link_to 'View Plans', plans_path(), method: :get %>
+<br>
+<%= link_to 'Add Plans', new_plan_path(), method: :get %>

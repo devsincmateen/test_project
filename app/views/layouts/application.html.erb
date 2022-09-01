@@ -13,12 +13,8 @@
 
        <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
-
-      <% if user_signed_in? %>
-        <p>Hey there I am a user and I am signed in <%= current_user.email %></p>
-      <%else%>
-      <a href='/users/sign_in'> Sign In han han kr leta hu </a>
-      <%end%>
       <%= yield %>
+      <br>
+      <%= link_to 'Dashboard', root_path(), method: :get %>
   </body>
 </html>

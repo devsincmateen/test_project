@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-# Dashboard Controller that controls the admin and buyer dashboards
-class DashboardController < ApplicationController
-  def index
+# services class for to make controllers skinny
+class Services
+  def self.go_to_dashboard
     if !user_signed_in?
       redirect_to(new_user_session_path)
     elsif current_user.admin?
@@ -11,8 +11,4 @@ class DashboardController < ApplicationController
       redirect_to(buyer_path)
     end
   end
-
-  def admin; end
-
-  def buyer; end
 end
