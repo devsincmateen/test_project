@@ -1,0 +1,9 @@
+<%= form_for @feature do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.label :unit_price %>
+  <%= f.text_field :unit_price %><br>
+  <%= f.label :max_unit_limit %>
+  <%= f.number_field :max_unit_limit %><br>
+  <%= f.submit 'Submit' %>
+<% end %>

@@ -1,72 +1,47 @@
 # frozen_string_literal: true
 
-# Controller for the plans
 class PlansController < ApplicationController
-  before_action :set_plan, only: %i[show edit update destroy]
-
-  # GET /plans or /plans.json
   def index
     @plans = Plan.all
   end
 
-  # GET /plans/1 or /plans/1.json
-  def show; end
-
-  # GET /plans/new
-  def new
-    @plan = Plan.new
-  end
-
-  # GET /plans/1/edit
-  def edit; end
-
-  # POST /plans or /plans.json
   def create
     @plan = Plan.new(plan_params)
-
-    respond_to do |format|
-      if @plan.save
-        format.html { redirect_to plan_url(@plan), notice: 'Plan was successfully created.' }
-        format.json { render :show, status: :created, location: @plan }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @plan.errors, status: :unprocessable_entity }
-      end
+    p @plans
+    if @plan.save
+      redirect_to @plan
+    else
+      render 'new'
     end
   end
 
-  # PATCH/PUT /plans/1 or /plans/1.json
-  def update
-    respond_to do |format|
-      if @plan.update(plan_params)
-        format.html { redirect_to plan_url(@plan), notice: 'Plan was successfully updated.' }
-        format.json { render :show, status: :ok, location: @plan }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @plan.errors, status: :unprocessable_entity }
-      end
-    end
+  def new
+    @plan = Plan.new
+    @feature = Feature.new
   end
 
-  # DELETE /plans/1 or /plans/1.json
-  def destroy
-    @plan.destroy
-
-    respond_to do |format|
-      format.html { redirect_to plans_url, notice: 'Plan was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-
-  # Use callbacks to share common setup or constraints between actions.
-  def set_plan
+  def edit
     @plan = Plan.find(params[:id])
   end
 
-  # Only allow a list of trusted parameters through.
+  def show
+    @plan = Plan.find(params[:id])
+  end
+
+  def update
+    @plan = Plan.find(params[:id])
+    if @plan.update(plan_params)
+      redirect_to @plan
+    else
+      redirect_to 'edit'
+    end
+  end
+
+  def destroy; end
+
+  private
+
   def plan_params
-    params.require(:plan).permit(:code, :name, :monthly_income, :unit_price, :max_unit_limit)
+    params.require(:plan).permit(:name, :code, :monthly_income)
   end
 end

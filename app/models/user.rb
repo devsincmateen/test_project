@@ -2,15 +2,15 @@
 
 # Users class for devise
 class User < ApplicationRecord
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true
-  validates :password, presence: true,
-                       confirmation: true,
-                       length: { within: 6..40 },
-                       unless: :force_submit
+  # validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }, presence: true
+  # validates :password, presence: true,
+  #                      confirmation: true,
+  #                      length: { within: 6..40 },
+  #                      unless: :force_submit
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable
 
@@ -18,6 +18,6 @@ class User < ApplicationRecord
   after_initialize :set_default_role, if: :new_record?
 
   def set_default_role
-    self.role ||= :admin
+    self.role ||= :buyer
   end
 end
