@@ -17,7 +17,6 @@ class PlansController < ApplicationController
 
   def new
     @plan = Plan.new
-    @feature = Feature.new
   end
 
   def edit
@@ -37,7 +36,10 @@ class PlansController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @plan = Plan.find(params[:id])
+    @plan.destroy
+  end
 
   private
 
