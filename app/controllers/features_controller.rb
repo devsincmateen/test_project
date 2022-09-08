@@ -1,21 +1,24 @@
 # frozen_string_literal: true
 
 class FeaturesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   def index
     @features = Feature.all
   end
 
   def create
-    @feature = Feature.new(feature_params)
-    p @features
-    if @feature.save
-      redirect_to @feature
+    @plan = Plan.find(params[:plan_id])
+    @feature = @plan.features.new(feature_params)
+    if @feature.save!
+      flash[:notice] = 'You have successfully added a feature.'
+      redirect_to plan_path
     else
       render 'new'
     end
   end
 
   def new
+    @plan = Plan.find(params[:plan_id])
     @feature = Feature.new
   end
 
@@ -36,11 +39,14 @@ class FeaturesController < ApplicationController
     end
   end
 
-  def destroy; end
+  def destroy
+    @feature = Feature.find(params[:id])
+    @feature.destroy
+  end
 
   private
 
   def feature_params
-    params.require(:feature).permit(:name, :code, :monthly_income)
+    params.require(:feature).permit(:name, :unit_price, :max_unit_limit)
   end
 end

@@ -1,3 +1,6 @@
-<%= @plan.code %><%= @plan.name %> <%=  @plan.monthly_income%>
-
-<% render 'feature/form'%>
+<%= if current_user.admin?
+       render partial: 'admin_show'
+    elsif current_user.buyer?
+       render partial: 'buyer_show'
+    end
+%>
