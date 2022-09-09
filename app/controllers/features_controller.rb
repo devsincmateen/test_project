@@ -13,38 +13,50 @@ class FeaturesController < ApplicationController
       flash[:notice] = 'You have successfully added a feature.'
       redirect_to plan_path
     else
+
+      flash[:notice] = 'Failed to add the feature.'
       render 'new'
     end
   end
 
-  def new
-    @plan = Plan.find(params[:plan_id])
-    @feature = Feature.new
-  end
-
   def edit
-    @feature = Feature.find(params[:id])
+    @plan = Plan.find(params[:plan_id])
+    @feature = @plan.features.find(params[:id])
   end
 
   def show
-    @feature = Feature.find(params[:id])
+    @plan = Plan.find(params[:plan_id])
+    @feature = @plan.features.find(params[:id])
+  end
+
+  def new
+    
+    @plan = Plan.find(params[:plan_id])
+    
+    @feature = @plan.features.build
   end
 
   def update
-    @feature = Feature.find(params[:id])
+    @feature = find_id
     if @feature.update(feature_params)
+      flash[:notice] = 'Feature Successfully Updated.'
       redirect_to @feature
     else
+      flash[:notice] = 'Feature Updation Failed.'
       redirect_to 'edit'
     end
   end
 
   def destroy
-    @feature = Feature.find(params[:id])
+    @feature = find_id
     @feature.destroy
   end
 
   private
+
+  def find_id
+    Feature.find(params[:id])
+  end
 
   def feature_params
     params.require(:feature).permit(:name, :unit_price, :max_unit_limit)

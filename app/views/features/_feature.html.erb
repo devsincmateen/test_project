@@ -4,6 +4,7 @@
       <td><%= feature.max_unit_limit %></td>
 
       <% if current_user.admin? %>
+      <%# <%byebug%> %>
             <td><%= link_to 'Show', plan_feature_path(@plan,feature) %></td>
             <td><%= link_to 'Edit', edit_plan_feature_path(@plan, feature) %></td>
             <td><%= link_to 'Destroy', plan_feature_path(@plan, feature),

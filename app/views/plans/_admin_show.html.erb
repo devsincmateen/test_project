@@ -13,7 +13,7 @@
 
 <h1>Features: </h1>
 
-<%= render @plan.features%>
+<%= render @plan.features %>
 
 <h1>Add Feature</h1>
-<%= render partial: 'features/form'%>
+<%= render partial: 'features/form', locals: {feature: @plan.features.build} %>

@@ -49,6 +49,10 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'letter_opener'
+  gem 'rubocop'
+  gem 'rubocop-minitest' # or gem 'rubocop-rspec' depending on your test suite
+  gem 'rubocop-performance'
+  gem 'rubocop-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
@@ -64,5 +68,6 @@ end
 gem 'devise'
 gem 'devise_invitable', '~> 2.0.0'
 gem 'file_validators'
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

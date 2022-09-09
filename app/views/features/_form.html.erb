@@ -1,4 +1,5 @@
-<%= form_for  [@plan, @plan.features.build]  do |f| %>
+<%# <% byebug %> %>
+<%= form_for  [@plan, feature]  do |f| %>
 
   <%= f.label :name %>
   <%= f.text_field :name %><br>

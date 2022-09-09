@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_220_906_142_148) do
+ActiveRecord::Schema.define(version: 20_220_908_111_101) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -64,6 +64,10 @@ ActiveRecord::Schema.define(version: 20_220_906_142_148) do
     t.float 'amount'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.bigint 'plan_id'
+    t.bigint 'user_id'
+    t.index ['plan_id'], name: 'index_subscriptions_on_plan_id'
+    t.index ['user_id'], name: 'index_subscriptions_on_user_id'
   end
 
   create_table 'users', force: :cascade do |t|
@@ -84,7 +88,7 @@ ActiveRecord::Schema.define(version: 20_220_906_142_148) do
     t.integer 'failed_attempts', default: 0, null: false
     t.string 'unlock_token'
     t.datetime 'locked_at'
-    t.integer 'role', default: 1
+    t.integer 'role', default: 0
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.string 'invitation_token'
@@ -107,4 +111,6 @@ ActiveRecord::Schema.define(version: 20_220_906_142_148) do
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'features', 'plans'
   add_foreign_key 'plans', 'features'
+  add_foreign_key 'subscriptions', 'plans'
+  add_foreign_key 'subscriptions', 'users'
 end
