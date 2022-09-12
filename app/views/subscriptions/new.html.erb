@@ -1,0 +1,8 @@
+<%= render partial: 'plans/plan', locals: { plan: @plan } %>
+<br>
+Hello there you are here for subscritpion are you sure?
+<br>
+<%# <% byebug %> %>
+<%= form_for  [@plan, @subscription]  do |f| %>
+  <%= f.submit 'Yes' %>
+<% end %>

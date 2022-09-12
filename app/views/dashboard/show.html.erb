@@ -1,6 +1,1 @@
-<%= if current_user.admin?
-       render partial: 'admin'
-    elsif current_user.buyer?
-       render partial: 'buyer'
-    end
-%>
+<%= render partial: current_user.admin? ? 'admin' : 'buyer' %>

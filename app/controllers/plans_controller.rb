@@ -7,12 +7,11 @@ class PlansController < ApplicationController
 
   def create
     @plan = Plan.new(plan_params)
-    Rails.logger.debug @plans
     if @plan.save
-      flash[:notice] = 'Plan Successfully Created.'
+      flash[:success] = 'Plan Successfully Created.'
       redirect_to @plan
     else
-      flash[:notice] = 'Failed to create Plan.'
+      flash[:error] = 'Failed to create Plan.'
       render 'new'
     end
   end
@@ -22,33 +21,36 @@ class PlansController < ApplicationController
   end
 
   def edit
-    @plan = find_id
+    set_plan
   end
 
   def show
-    @plan = find_id
+    set_plan
   end
 
   def update
-    @plan = find_id
+    set_plan
     if @plan.update(plan_params)
-      flash[:notice] = 'Plan successfully updated.'
+      flash[:success] = 'Plan successfully updated.'
       redirect_to @plan
     else
-      flash[:notice] = 'Failed to update Plan.'
+      flash[:error] = 'Failed to update Plan.'
       redirect_to 'edit'
     end
   end
 
   def destroy
-    @plan = find_id
-    @plan.destroy
+    Plan.destroy(params[:id])
+  end
+
+  def myplans
+    @subscriptions = Subscription.includes(:plan).where(user_id: current_user.id)
   end
 
   private
 
-  def find_id
-    Plan.find(params[:id])
+  def set_plan
+    @plan = Plan.find(params[:id])
   end
 
   def plan_params

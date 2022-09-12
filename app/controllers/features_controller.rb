@@ -7,9 +7,9 @@ class FeaturesController < ApplicationController
   end
 
   def create
-    @plan = Plan.find(params[:plan_id])
+    set_plan
     @feature = @plan.features.new(feature_params)
-    if @feature.save!
+    if @feature.save
       flash[:notice] = 'You have successfully added a feature.'
       redirect_to plan_path
     else
@@ -20,42 +20,45 @@ class FeaturesController < ApplicationController
   end
 
   def edit
-    @plan = Plan.find(params[:plan_id])
-    @feature = @plan.features.find(params[:id])
+    set_plan
+    @feature = Features.find(params[:id])
   end
 
   def show
-    @plan = Plan.find(params[:plan_id])
-    @feature = @plan.features.find(params[:id])
+    set_plan
+    @feature = Features.find(params[:id])
   end
 
   def new
-    
-    @plan = Plan.find(params[:plan_id])
-    
+    set_plan
+    if 
     @feature = @plan.features.build
   end
 
   def update
-    @feature = find_id
+    set_feature
     if @feature.update(feature_params)
-      flash[:notice] = 'Feature Successfully Updated.'
+      flash[:success] = 'Feature Successfully Updated.'
       redirect_to @feature
     else
-      flash[:notice] = 'Feature Updation Failed.'
+      flash[:error] = 'Feature Updation Failed.'
       redirect_to 'edit'
     end
   end
 
   def destroy
-    @feature = find_id
+    set_feature
     @feature.destroy
   end
 
   private
 
-  def find_id
-    Feature.find(params[:id])
+  def set_plan
+    @plan = Plan.find(params[:plan_id])
+  end
+
+  def set_feature
+    @feature = Feature.find(params[:id])
   end
 
   def feature_params
