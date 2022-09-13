@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_12_103323) do
+ActiveRecord::Schema.define(version: 2022_09_13_105855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,10 @@ ActiveRecord::Schema.define(version: 2022_09_12_103323) do
     t.float "units"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "feature_id"
+    t.bigint "subscription_id"
+    t.index ["feature_id"], name: "index_usages_on_feature_id"
+    t.index ["subscription_id"], name: "index_usages_on_subscription_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -117,4 +121,6 @@ ActiveRecord::Schema.define(version: 2022_09_12_103323) do
   add_foreign_key "plans", "features"
   add_foreign_key "subscriptions", "plans"
   add_foreign_key "subscriptions", "users"
+  add_foreign_key "usages", "features"
+  add_foreign_key "usages", "subscriptions"
 end

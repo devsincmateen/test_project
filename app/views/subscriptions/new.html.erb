@@ -3,6 +3,8 @@
 Hello there you are here for subscritpion are you sure?
 <br>
 <%# <% byebug %> %>
-<%= form_for  [@plan, @subscription]  do |f| %>
+<%= form_for  [@subscription]  do |f| %>
+  <%= f.text_field :plan_id, :value => params[:format]  %>
+  <%# <%byebug%> %>
   <%= f.submit 'Yes' %>
 <% end %>

@@ -2,6 +2,7 @@
 
 class FeaturesController < ApplicationController
   skip_before_action :verify_authenticity_token
+
   def index
     @features = Feature.all
   end
@@ -64,4 +65,5 @@ class FeaturesController < ApplicationController
   def feature_params
     params.require(:feature).permit(:name, :unit_price, :max_unit_limit)
   end
+  
 end

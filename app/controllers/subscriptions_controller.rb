@@ -2,35 +2,50 @@
 
 class SubscriptionsController < ApplicationController
   def new
-    set_plan
+    # byebug
+    @plan = Plan.find(params[:format])
     set_subscription
   end
 
   def create
+    set_subscription
     set_plan
-    @subscription = @plan.subscriptions.new
+    @subscription.plan_id = @plan.id
+
     @subscription.user_id = current_user.id
     if @subscription.save
+      byebug
       flash[:success] = 'You have subscribed sucessfully'
-      redirect_to plan_subscription_path(@plan, @subscription)
+      @plan.features.each do |f|
+        usage = Usage.new(:subscription_id => @subscription.id, :feature_id => f.id, :units => 0)
+        byebug
+        usage.save
+      end
+      redirect_to subscription_path(@subscription)
+        
     else
       flash[:error] = 'Subscription Failed'
-      redirect_to new_subscription_path(@plan, @subscription)
+      redirect_to new_subscription_path(@plan)
     end
   end
 
   def show
-    set_plan
     @subscription = Subscription.find(params[:id])
+    @plan = @subscription.plan
+  end
+
+  def mysubs
+    @subscriptions = Subscription.includes(:plan).where(user_id: current_user.id)
   end
 
   private
 
   def set_plan
-    @plan = Plan.find(params[:plan_id])
+    p = params[:subscription]
+    @plan = Plan.find(p[:plan_id])
   end
 
   def set_subscription
-    @subscription = @plan.subscriptions.new
+    @subscription = Subscription.new
   end
 end
