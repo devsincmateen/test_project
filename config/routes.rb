@@ -6,9 +6,12 @@ Rails.application.routes.draw do
   root to: 'dashboard#show'
   resource :dashboard, only: [:show]
   resources :plans do
-    collection { get 'myplans' }
     resources :features
-    resources :subscriptions
+    # resources :subscriptions, :only [:new, :create]
+  end
+  resources :subscriptions do
+    collection { get 'mysubs' }
+    resources :usages
   end
 
   # get 'admin', to: 'dashboard#admin'

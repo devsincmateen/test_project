@@ -2,7 +2,7 @@
   <td><%= feature.name %></td>
   <td><%= feature.unit_price %></td>
   <td><%= feature.max_unit_limit %></td>
-
+  <%# <%byebug%> %>
   <% if current_user.admin? %>
   <%# <%byebug%> %>
     <td><%= link_to 'Show', plan_feature_path(@plan,feature) %></td>
@@ -11,11 +11,8 @@
     method: :delete,
       data: { confirm: 'Are you sure?' }%></td>
   <% elsif current_user.buyer? %>
-    <%= form_for  [feature]  do |f| %>
-      <%= f.label :Units %>
-      <%= f.number_field :units_used %><br>
-      <%= f.submit 'Submit' %>
-  <% end %>
+  <%# <%byebug%> %>
+    <%# <%= link_to 'Add Usage', new_plan_subscription_usage_path(@plan, @subscription, feature) %> %>
   <%end%> 
 </tr> 
 <br> 

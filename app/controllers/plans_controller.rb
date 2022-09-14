@@ -43,10 +43,6 @@ class PlansController < ApplicationController
     Plan.destroy(params[:id])
   end
 
-  def myplans
-    @subscriptions = Subscription.includes(:plan).where(user_id: current_user.id)
-  end
-
   private
 
   def set_plan
