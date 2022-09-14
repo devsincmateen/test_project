@@ -18,8 +18,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable
 
-  enum role: { admin: 0, buyer: 1 }
+  enum role: { buyer: 0,  admin: 1 }
   after_initialize :set_default_role, if: :new_record?
+
+  before_save :set_default_role
 
   def set_default_role
     self.role ||= :buyer

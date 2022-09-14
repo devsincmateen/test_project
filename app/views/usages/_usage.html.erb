@@ -1,3 +1,7 @@
 <%# <%byebug%> %>
 <%= render partial: 'features/feature', locals: { feature: usage.feature } %>
+<%# <%byebug%> %>
 <p>Used: <%= usage.units%></p>
+<br>
+<%= render partial: 'form', locals: {usage: usage} %>
+<%= link_to 'Add usage', subscription_usage_path(@subscription, usage) %>

@@ -38,7 +38,7 @@ class SubscriptionsController < ApplicationController
     @subscriptions = Subscription.includes(:plan).where(user_id: current_user.id)
   end
 
-  private
+  private 
 
   def set_plan
     p = params[:subscription]

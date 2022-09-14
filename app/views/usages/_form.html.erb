@@ -1,0 +1,6 @@
+<%# <% byebug %> %>
+<%= form_for  [@subscription, usage]  do |f| %>
+  <%= f.label :Number_of_units_used %>
+  <%= f.number_field :units %><br>
+  <%= f.submit 'Submit' %>
+<% end %>

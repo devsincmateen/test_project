@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_09_13_105855) do
+ActiveRecord::Schema.define(version: 2022_09_14_083544) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,10 +52,10 @@ ActiveRecord::Schema.define(version: 2022_09_13_105855) do
     t.float "monthly_income"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "feature_id"
-    t.string "foreign_key"
-    t.string "true"
-    t.index ["feature_id"], name: "index_plans_on_feature_id"
+    t.bigint "{:foreign_key=>true}_id"
+    t.index ["code"], name: "index_plans_on_code", unique: true
+    t.index ["name"], name: "index_plans_on_name", unique: true
+    t.index ["{:foreign_key=>true}_id"], name: "index_plans_on_{:foreign_key=>true}_id"
   end
 
   create_table "subscriptions", force: :cascade do |t|
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 2022_09_13_105855) do
     t.datetime "updated_at", null: false
     t.bigint "plan_id"
     t.bigint "user_id"
+    t.index ["plan_id", "user_id"], name: "index_subscriptions_on_plan_id_and_user_id", unique: true
     t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
     t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
@@ -74,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_09_13_105855) do
     t.datetime "updated_at", null: false
     t.bigint "feature_id"
     t.bigint "subscription_id"
+    t.index ["feature_id", "subscription_id"], name: "index_usages_on_feature_id_and_subscription_id", unique: true
     t.index ["feature_id"], name: "index_usages_on_feature_id"
     t.index ["subscription_id"], name: "index_usages_on_subscription_id"
   end
@@ -107,6 +109,7 @@ ActiveRecord::Schema.define(version: 2022_09_13_105855) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
+    t.bigint "{:foreign_key=>true}_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
@@ -114,11 +117,11 @@ ActiveRecord::Schema.define(version: 2022_09_13_105855) do
     t.index ["invited_by_type", "invited_by_id"], name: "index_users_on_invited_by_type_and_invited_by_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true
+    t.index ["{:foreign_key=>true}_id"], name: "index_users_on_{:foreign_key=>true}_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "features", "plans"
-  add_foreign_key "plans", "features"
   add_foreign_key "subscriptions", "plans"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "usages", "features"
