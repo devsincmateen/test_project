@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     collection { get 'mysubs' }
     resources :usages
   end
-
+  resources :checkout, only: [:create]
   # get 'admin', to: 'dashboard#admin'
   # get 'buyer', to: 'dashboard#buyer'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

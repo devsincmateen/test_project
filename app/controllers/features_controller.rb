@@ -12,7 +12,7 @@ class FeaturesController < ApplicationController
     @feature = @plan.features.new(feature_params)
     if @feature.save
       flash[:notice] = 'You have successfully added a feature.'
-      redirect_to plan_path
+      redirect_to plans_path
     else
 
       flash[:notice] = 'Failed to add the feature.'
@@ -34,6 +34,7 @@ class FeaturesController < ApplicationController
     set_plan
     if 
     @feature = @plan.features.build
+    end
   end
 
   def update
