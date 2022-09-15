@@ -1,0 +1,12 @@
+<h1> Plan ID <%= @plan.id%></h1>
+<br>
+<tr>
+      <td><%= @plan.name %></td>
+      <td><%= @plan.code %></td>
+      <td><%= @plan.monthly_income %></td>
+        <td><%= link_to 'Subscribe', new_subscription_path(@plan) %></td>
+
+</tr>
+
+<h1>Features: </h1>
+<%= render @plan.features%>

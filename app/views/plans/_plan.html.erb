@@ -1,0 +1,19 @@
+<tr>
+
+  <td><%= plan.name %></td>
+  <td><%= plan.code %></td>
+  <td><%= plan.monthly_income %></td>
+  <%# <%byebug%> %>
+  <% if controller.controller_name == 'subscriptions' && params[:subscription_id] != nil%>
+  <%# <%byebug%> %>
+    <td><%= link_to 'Add Usage', subscription_usages_path(@subscription) %></td>
+  <%elsif%>
+    <td><%= link_to 'Show', plan_path(plan) %></td>
+  <%end%>
+  <% if current_user.admin? %>    
+  <td><%= link_to 'Edit', edit_plan_path(plan) %></td>
+  <td><%= link_to 'Destroy', plan_path(plan),
+    method: :delete,
+    data: { confirm: 'Are you sure?' } %></td>
+  <% end %>
+</tr>

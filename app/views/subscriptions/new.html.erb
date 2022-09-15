@@ -1,0 +1,11 @@
+<%= render partial: 'plans/plan', locals: { plan: @plan } %>
+<br>
+Hello there you are here for subscritpion are you sure?
+<br>
+<%# <% byebug %> %>
+<%= button_to "Pay now!", checkout_index_path, params: { plan_id: params[:format] }, remote: true%>
+<%= form_for  [@subscription]  do |f| %>
+  <% f.text_field :plan_id, :value => params[:format]  %>
+  <%# <%byebug%> %>
+  <%= f.submit 'Yes' %>
+<% end %>

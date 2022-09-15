@@ -1,0 +1,9 @@
+<%= form_for @plan do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br>
+  <%= f.label :code %>
+  <%= f.text_field :code %><br>
+  <%= f.label :monthly_income %>
+  <%= f.number_field :monthly_income %><br>
+  <%= f.submit 'Submit' %>
+<% end %>

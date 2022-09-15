@@ -4,7 +4,7 @@
     <title>BRSP</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <script src="https://js.stripe.com/v3/"></script>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
@@ -14,11 +14,11 @@
        <p class="notice"><%= notice %></p>
        <p class="alert"><%= alert %></p>
 
-      <% if user_signed_in? %>
-        <p>Hey there I am a user and I am signed in</p>
-      <%else%>
-      <a href='users/sign_in'> Sign In </a>
-      <%end%>
-    <%= yield %>
+      <%= link_to 'Sign Out', destroy_user_session_path(), method: :delete %>
+
+
+      <%= yield %>
+      <br>
+      <%= link_to 'Dashboard', root_path(), method: :get %>
   </body>
 </html>

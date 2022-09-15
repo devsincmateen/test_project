@@ -1,0 +1,17 @@
+Hello I am admin <%= current_user %>
+
+<h1>Admin Dashboard</h1>
+<p>You are signed in as <%= current_user.email%> </p>
+
+<%# <%= link_to 'View Plans', plans_path(), method: :get %>
+<%# <br> %>
+<%# <%= link_to 'Add Plans', new_plan_path(), method: :get %> %> %>
+
+
+<%= link_to 'Add User', new_user_invitation_path, method: :get %>
+<br>
+<%= link_to 'All Users', users_index_path, method: :get %>
+<br>
+<%= link_to 'Add Plans', new_plan_path, method: :get %>
+<br>
+<%= link_to 'All Plans', plans_path, method: :get %>

@@ -1,0 +1,18 @@
+<h1> Plan ID <%= @plan.id%></h1>
+<br>
+<tr>
+  <td><%= @plan.name %></td>
+  <td><%= @plan.code %></td>
+  <td><%= @plan.monthly_income %></td>
+  <td><%= link_to 'Edit', edit_plan_path(@plan) %></td>
+  <td><%= link_to 'Destroy', plan_path(@plan),
+    method: :delete,
+    data: { confirm: 'Are you sure?' } %></td>
+</tr>
+
+<h1>Features: </h1>
+
+<%= render @plan.features %>
+
+<h1>Add Feature</h1>
+<%= render partial: 'features/form', locals: {feature: @plan.features.build} %>
