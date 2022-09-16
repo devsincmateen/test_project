@@ -42,8 +42,8 @@ ActiveRecord::Schema.define(version: 2022_09_14_083544) do
     t.integer "max_unit_limit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "plan_id"
-    t.index ["plan_id"], name: "index_features_on_plan_id"
+    t.bigint "plans_id"
+    t.index ["plans_id"], name: "index_features_on_plans_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2022_09_14_083544) do
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "{:foreign_key=>true}_id"
     t.string "invitation_token"
     t.datetime "invitation_created_at"
     t.datetime "invitation_sent_at"
@@ -109,7 +110,6 @@ ActiveRecord::Schema.define(version: 2022_09_14_083544) do
     t.string "invited_by_type"
     t.bigint "invited_by_id"
     t.integer "invitations_count", default: 0
-    t.bigint "{:foreign_key=>true}_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
@@ -121,7 +121,7 @@ ActiveRecord::Schema.define(version: 2022_09_14_083544) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "features", "plans"
+  add_foreign_key "features", "plans", column: "plans_id"
   add_foreign_key "subscriptions", "plans"
   add_foreign_key "subscriptions", "users"
   add_foreign_key "usages", "features"

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :usages
   end
   resources :checkout, only: [:create]
+  resources :webhooks, only: [:create]
   # get 'admin', to: 'dashboard#admin'
   # get 'buyer', to: 'dashboard#buyer'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
