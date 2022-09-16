@@ -10,7 +10,9 @@ user = User.new(
     :email                 => "admin@dispostable.com",
     :password              => "123456",
     :password_confirmation => "123456",
-    :role                  => "admin"
+    :role                  => "admin",
+    :confirmed_at          => DateTime.now
+
 )
 user.skip_confirmation!
 user.save!
@@ -19,7 +21,9 @@ user = User.new(
     :email                 => "buyer@dispostable.com",
     :password              => "123456",
     :password_confirmation => "123456",
-    :role                  => "buyer"
+    :role                  => "buyer",
+    :confirmed_at          => DateTime.now
+
 )
 user.skip_confirmation!
 user.save!
