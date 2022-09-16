@@ -30,7 +30,8 @@ class WebhooksController < ApplicationController
         @product.increment!(:sales_count)
       end
 
-    when 'product.created'
+      case event.type
+      when 'product.created'
         session = event.data.object
         @plan = Plan.find_by(name: session.name)
         @subscription.plan_id = @plan.id
