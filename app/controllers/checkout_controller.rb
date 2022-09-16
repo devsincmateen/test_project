@@ -17,7 +17,7 @@ class CheckoutController < ApplicationController
 
             }],
             mode: 'payment',
-            success_url: root_url,
+            success_url: subscriptions_url,
             cancel_url: root_url,
           })
             # byebug
