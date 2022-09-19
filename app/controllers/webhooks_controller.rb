@@ -25,15 +25,6 @@ class WebhooksController < ApplicationController
       when 'checkout.session.completed'
         session = event.data.object
         @subscription = Subscription.new
-        byebug
-        @product = Product.find_by(price: session.amount_total)
-        @product.increment!(:sales_count)
-      end
-
-      case event.type
-      when 'product.created'
-        session = event.data.object
-        @plan = Plan.find_by(name: session.name)
         @subscription.plan_id = @plan.id
 
         @subscription.user_id = current_user.id
@@ -51,7 +42,10 @@ class WebhooksController < ApplicationController
           flash[:error] = 'Subscription Failed'
           redirect_to new_subscription_path(@plan)
         end
-    
+      
+      when 'product.created'
+        session = event.data.object
+        @plan = Plan.find_by(name: session.name)
       end
   
       render json: { message: 'success' }
