@@ -1,10 +1,12 @@
 class WebhooksController < ApplicationController
-  
+  skip_before_action :authenticate_user!
+  skip_before_action :verify_authenticity_token
+
     def create
       payload = request.body.read
       sig_header = request.env['HTTP_STRIPE_SIGNATURE']
       event = nil
-  
+      
       begin
         event = Stripe::Webhook.construct_event(
           payload, sig_header, Rails.application.credentials[:stripe][:webhook]
@@ -18,7 +20,9 @@ class WebhooksController < ApplicationController
         p e
         return
       end
-  
+      
+      puts event
+
       # Handle the event
       case event.type
       when 'checkout.session.completed'
@@ -41,7 +45,8 @@ class WebhooksController < ApplicationController
           flash[:error] = 'Subscription Failed'
           redirect_to new_subscription_path(@plan)
         end
-      
+        skip_before_action :authenticate_user!
+        skip_before_action :verify_authenticity_token      
       when 'product.created'
         session = event.data.object
         @plan = Plan.find_by(name: session.name)

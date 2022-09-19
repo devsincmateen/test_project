@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   end
   resources :checkout, only: [:create]
   resources :webhooks, only: [:create]
+  mount StripeEvent::Engine, at: '/webhooks'
+
   # get 'admin', to: 'dashboard#admin'
   # get 'buyer', to: 'dashboard#buyer'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

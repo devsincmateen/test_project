@@ -12,7 +12,6 @@ class UsagesController < ApplicationController
   end
 
   def update
-    
     @usage = Usage.find(params[:id])
     @usage.units += get_units
     @usage.save

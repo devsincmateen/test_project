@@ -18,7 +18,6 @@ class SubscriptionsController < ApplicationController
       flash[:success] = 'You have subscribed sucessfully'
       @plan.features.each do |f|
         usage = Usage.new(:subscription_id => @subscription.id, :feature_id => f.id, :units => 0)
-        byebug
         usage.save
       end
       redirect_to subscription_path(@subscription)
