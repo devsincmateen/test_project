@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   end
   resources :checkout, only: [:create]
   resources :webhooks, only: [:create]
-  mount StripeEvent::Engine, at: '/webhooks'
+  # mount StripeEvent::Engine, at: '/webhooks'
 
   # get 'admin', to: 'dashboard#admin'
   # get 'buyer', to: 'dashboard#buyer'
